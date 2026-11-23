@@ -1,12 +1,14 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+// Office Jokes v2: a setup-turn one-liner about office life.
+// The manager promises to clear the backlog; IT clears the employee.
+// Punch lands in the last five words: the "clearing" was a layoff.
+import { mkdirSync, writeFileSync } from "node:fs";
 
-const TEXT = 'The fastest Wi-Fi in the office is the rumour mill — zero latency, full coverage, never down.';
+const JOKE =
+  "My manager promised he'd clear my backlog by Friday, and to his credit, IT locked my laptop at noon.";
 
-const outDir = (() => {
-  const i = process.argv.indexOf('--output');
-  if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
-  return process.env.MAKEFUN_OUTPUT_DIR ?? './output';
-})();
-mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, 'entry.txt'), TEXT, 'utf8');
+if (JOKE.length !== 100) {
+  throw new Error(`joke must be exactly 100 characters, got ${JOKE.length}`);
+}
+
+mkdirSync("/output", { recursive: true });
+writeFileSync("/output/entry.txt", JOKE, "utf8");
